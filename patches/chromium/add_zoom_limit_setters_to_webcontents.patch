@@ -8,10 +8,10 @@ This is needed by Electron to allow apps to limit how much an app can zoom in
 or out.
 
 diff --git a/content/browser/web_contents/web_contents_impl.cc b/content/browser/web_contents/web_contents_impl.cc
-index af289e4543aab31e8c70adf068b97fc9d7dfd402..8a2189156f73fd574d9a7f671250dde5555abcb1 100644
+index 7234fb69a1894ff9d9b77aaea76330311f0638c5..a895ecc3c05c2755e8db8fe300f5941c7af0915a 100644
 --- a/content/browser/web_contents/web_contents_impl.cc
 +++ b/content/browser/web_contents/web_contents_impl.cc
-@@ -4187,10 +4187,18 @@ bool WebContentsImpl::GetClosedByUserGesture() {
+@@ -4168,10 +4168,18 @@ bool WebContentsImpl::GetClosedByUserGesture() {
    return closed_by_user_gesture_;
  }
  
@@ -31,7 +31,7 @@ index af289e4543aab31e8c70adf068b97fc9d7dfd402..8a2189156f73fd574d9a7f671250dde5
    return maximum_zoom_percent_;
  }
 diff --git a/content/browser/web_contents/web_contents_impl.h b/content/browser/web_contents/web_contents_impl.h
-index 188c8da6ddf105ac98ffdd0760266c0e86a3fb8e..0427e0f81812d6eec775b3cbc7c3d23385b671ba 100644
+index 4974e934d3561caf570dc1e0b6e69a70754b893b..6f44cf05f65f7849b1e2b980383f97754c04c3f0 100644
 --- a/content/browser/web_contents/web_contents_impl.h
 +++ b/content/browser/web_contents/web_contents_impl.h
 @@ -457,7 +457,9 @@ class CONTENT_EXPORT WebContentsImpl : public WebContents,
@@ -44,7 +44,7 @@ index 188c8da6ddf105ac98ffdd0760266c0e86a3fb8e..0427e0f81812d6eec775b3cbc7c3d233
    int GetMaximumZoomPercent() override;
    void SetPageScale(float page_scale_factor) override;
    gfx::Size GetPreferredSize() override;
-@@ -1728,8 +1730,8 @@ class CONTENT_EXPORT WebContentsImpl : public WebContents,
+@@ -1730,8 +1732,8 @@ class CONTENT_EXPORT WebContentsImpl : public WebContents,
    bool closed_by_user_gesture_;
  
    // Minimum/maximum zoom percent.
@@ -56,10 +56,10 @@ index 188c8da6ddf105ac98ffdd0760266c0e86a3fb8e..0427e0f81812d6eec775b3cbc7c3d233
    // Used to correctly handle integer zooming through a smooth scroll device.
    float zoom_scroll_remainder_;
 diff --git a/content/public/browser/web_contents.h b/content/public/browser/web_contents.h
-index 38a8b4db666bb9c549f67f36f0d1458b1d13d784..47850cd5d7941cce03520d5f0d1976bebb31bbde 100644
+index 0ce547c74610e13f7f723da997fb0a9799c96efb..6f462052ba3b9901d50d5f860f14d3f471263420 100644
 --- a/content/public/browser/web_contents.h
 +++ b/content/public/browser/web_contents.h
-@@ -841,8 +841,10 @@ class WebContents : public PageNavigator,
+@@ -844,8 +844,10 @@ class WebContents : public PageNavigator,
    virtual void SetClosedByUserGesture(bool value) = 0;
    virtual bool GetClosedByUserGesture() = 0;
  
